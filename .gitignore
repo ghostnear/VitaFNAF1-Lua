@@ -1,0 +1,9 @@
+## Ignore external files
+
+# That need to be user-provided
+external/eboot.bin
+external/assets/
+
+## Ignore built files
+build/
+bin/
