@@ -10,9 +10,6 @@ dofile('app0:/core/state.lua')
 local stateManager = dofile('app0:/core/statemanager.lua'):new()
 stateManager:pushState(dofile('app0:/game/states/mainState.lua'):new())
 
--- Hello world test
-local quit = false
-
 -- Main loop
 while not stateManager:canQuit() do
 
@@ -25,6 +22,7 @@ while not stateManager:canQuit() do
 
     end
     if Controls.check(pad, SCE_CTRL_TRIANGLE) then
+        -- This efectively closes the app if no more states are added
         stateManager:clearStates()
     end
 
