@@ -32,7 +32,7 @@ function Queue:pop()
 end
 
 -- Gets first element of the queue
-function Queue:first()
+function Queue:getFront()
     return self.elements[self.front]
 end
 

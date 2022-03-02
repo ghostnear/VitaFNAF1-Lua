@@ -1,9 +1,11 @@
 -- Create state class
 State = class()
+State.assetManager = nil
+State.stateManager = nil
 
 -- Default functions, should be overwritten by any inheritors
 function State:init()
-
+    self.assetManager = AssetManager:new()
 end
 
 function State:update(dt)

@@ -9,4 +9,4 @@ cp -r src/* build/
 
 # Make archive with the build
 cd build
-7z a -mm=Deflate -mfb=258 -mpass=15 -r ../bin/VitaFNAF1.vpk .
+7z a -mm=Deflate -mfb=258 -mpass=15 -r ../bin/VitaFNAF1-Lua.vpk .

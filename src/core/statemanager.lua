@@ -1,4 +1,4 @@
--- Statemanager class (local as only one is required)
+-- Asset manager class (local so it can be instantiated)
 local StateManager = class()
 StateManager.stateQueue = nil
 
@@ -9,7 +9,10 @@ end
 
 -- Main update function
 function StateManager:update(dt)
-
+    local containerPointer = self.stateQueue:getContainer()
+    for i = 0, self.stateQueue:length() - 1, 1 do
+        containerPointer[i]:update(dt)
+    end
 end
 
 -- Main draw function
@@ -22,6 +25,7 @@ end
 
 -- Main state handling functions
 function StateManager:pushState(state)
+    state.stateManager = self
     self.stateQueue:push(state)
 end
 
