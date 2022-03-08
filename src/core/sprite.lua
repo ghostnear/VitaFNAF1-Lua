@@ -50,6 +50,11 @@ end
 
 -- Draws the sprite
 function Sprite:draw()
+    -- If image is a collection of images (GIF)
+    if self.frame ~= -1 then
+        Graphics.setImageFrame(self.image, self.frame)
+    end
+
     Graphics.drawImageExtended(
         self.rect.x, self.rect.y, self.image,
         self.insideRect.x, self.insideRect.y, self.insideRect.w, self.insideRect.h,

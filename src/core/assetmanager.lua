@@ -15,6 +15,11 @@ function AssetManager:load(type, name, path)
             type = "image",
             id = Graphics.loadImage("app0:/" .. path)
         }
+    elseif type == "animatedimage" then
+        self.assets[name] = {
+            type = "animatedimage",
+            id = Graphics.loadAnimatedImage("app0:/" .. path)
+        }
     end
 end
 

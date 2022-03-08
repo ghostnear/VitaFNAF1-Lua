@@ -18,6 +18,11 @@ function loadingState:init(stateM)
         name = "gui_icon_load",
         path = "assets/gui/loader.png"
     })
+    self.loadList:push({
+        type = "animatedimage",
+        name = "menu_background",
+        path = "assets/menu/menu.gif"
+    })
 
     -- Init sprite for drawing
     self.loadSprite = Sprite:new()
@@ -28,9 +33,15 @@ function loadingState:update(dt)
     -- Load the required asset and remove it from the queue
     local currentAsset = self.loadList:getFront()
 
-    if currentAsset ~= nil then
+    if self.loadList:length() > 0 then
         self.assetManager:load(currentAsset.type, currentAsset.name, currentAsset.path)
         self.loadList:pop()
+    else
+        -- Loading finished, move to menu
+        local menuState = dofile('app0:/game/states/menuState.lua'):new(self.stateManager)
+        menuState.assetManager = self.assetManager
+        self.stateManager:pushState(menuState)
+        self.stateManager:popState()
     end
 end
 

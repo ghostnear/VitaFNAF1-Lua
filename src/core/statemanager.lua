@@ -10,7 +10,7 @@ end
 -- Main update function
 function StateManager:update(dt)
     local containerPointer = self.stateQueue:getContainer()
-    for i = 0, self.stateQueue:length() - 1, 1 do
+    for i = self.stateQueue.front, self.stateQueue.back - 1, 1 do
         if containerPointer[i].update then
             containerPointer[i]:update(dt)
         end
@@ -20,7 +20,7 @@ end
 -- Main draw function
 function StateManager:draw()
     local containerPointer = self.stateQueue:getContainer()
-    for i = 0, self.stateQueue:length() - 1, 1 do
+    for i = self.stateQueue.front, self.stateQueue.back - 1, 1 do
         if containerPointer[i].draw then
             containerPointer[i]:draw()
         end
@@ -32,7 +32,10 @@ function StateManager:pushState(state)
     self.stateQueue:push(state)
 end
 
--- Clear the state queue
+function StateManager:popState()
+    self.stateQueue:pop()
+end
+
 function StateManager:clearStates()
     self.stateQueue:clear()
 end
