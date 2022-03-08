@@ -10,16 +10,16 @@ end
 -- Load an asset
 function AssetManager:load(type, name, path)
     -- Load an image
-    if type == 'image' then
+    if type == "image" then
         self.assets[name] = {
             type = "image",
-            id = Graphics.loadImage("app0:/" + path)
+            id = Graphics.loadImage("app0:/" .. path)
         }
     end
 end
 
--- Get an asset
-function AssetManager:get(name)
+-- Get
+function AssetManager:getAsset(name)
     return self.assets[name]
 end
 
@@ -27,7 +27,7 @@ end
 function AssetManager:unload(name)
     -- Pointer to the asset
     local asset = self.assets[name]
-    if type == 'image' then
+    if type == "image" then
         Graphics.freeImage(asset.file)
     end
 end

@@ -6,7 +6,8 @@ mkdir bin
 cp -r sce_sys build/sce_sys
 cp external/eboot.bin build/eboot.bin
 cp -r src/* build/
+cp -r external/assets build/
 
 # Make archive with the build
 cd build
-7z a -mm=Deflate -mfb=258 -mpass=15 -r ../bin/VitaFNAF1-Lua.vpk .
+7z a -r ../bin/VitaFNAF1-Lua.vpk .
