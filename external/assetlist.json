@@ -23,5 +23,45 @@
         "type": "image",
         "name": "menu_background_4",
         "path": "assets/menu/4.png"
+    },
+    {
+        "type": "image",
+        "name": "static_1",
+        "path": "assets/gui/static/1.png"
+    },
+    {
+        "type": "image",
+        "name": "static_2",
+        "path": "assets/gui/static/2.png"
+    },
+    {
+        "type": "image",
+        "name": "static_3",
+        "path": "assets/gui/static/3.png"
+    },
+    {
+        "type": "image",
+        "name": "static_4",
+        "path": "assets/gui/static/4.png"
+    },
+    {
+        "type": "image",
+        "name": "static_5",
+        "path": "assets/gui/static/5.png"
+    },
+    {
+        "type": "image",
+        "name": "static_6",
+        "path": "assets/gui/static/6.png"
+    },
+    {
+        "type": "image",
+        "name": "static_7",
+        "path": "assets/gui/static/7.png"
+    },
+    {
+        "type": "image",
+        "name": "static_8",
+        "path": "assets/gui/static/8.png"
     }
 ]

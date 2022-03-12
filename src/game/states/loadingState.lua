@@ -41,8 +41,7 @@ function loadingState:update(dt)
         self.loadList:pop()
     else
         -- Loading finished, move to menu
-        local menuState = dofile('app0:/game/states/menuState.lua'):new(self.stateManager)
-        menuState.assetManager = self.assetManager
+        local menuState = dofile('app0:/game/states/menuState.lua'):new(self.stateManager, self.assetManager)
         self.stateManager:pushState(menuState)
         self.stateManager:popState()
     end

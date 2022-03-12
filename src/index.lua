@@ -29,7 +29,7 @@ while not stateManager:canQuit() do
     end
 
     -- Update
-    stateManager:update(0)
+    stateManager:update(1 / 60)
 
     -- Start the rendering
     Graphics.initBlend()
