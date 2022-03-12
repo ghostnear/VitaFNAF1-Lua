@@ -1,10 +1,6 @@
 -- Loading screen, loads all assets and saves them in the AssetManager class
 local loadingState = State:extend()
 local json = dofile('app0:/lib/external/json.lua')
-loadingState.assetManager = nil
-loadingState.stateManager = nil
-loadingState.loadList = nil
-loadingState.loadSprite = nil
 
 -- Constructor
 function loadingState:init(stateM)
@@ -15,7 +11,7 @@ function loadingState:init(stateM)
     -- Open the load list from the assetlist file
     -- The game is relatively small so we can keep everything in memory as the Vita RAM allows us to
     self.loadList = Queue:new()
-    local fileHandle = System.openFile("app0:/assetlist.json", FREAD)
+    local fileHandle = System.openFile("app0:/menuAssetList.json", FREAD)
     local fileString = System.readFile(fileHandle, System.sizeFile(fileHandle))
     local result = json.decode(fileString)
     for i, v in pairs(result) do
@@ -40,9 +36,9 @@ function loadingState:update(dt)
         self.assetManager:load(currentAsset.type, currentAsset.name, currentAsset.path)
         self.loadList:pop()
     else
-        -- Loading finished, move to menu
-        local menuState = dofile('app0:/game/states/menuState.lua'):new(self.stateManager, self.assetManager)
-        self.stateManager:pushState(menuState)
+        -- Loading finished, move to warning
+        local warningState = dofile('app0:/game/states/warningState.lua'):new(self.stateManager, self.assetManager)
+        self.stateManager:pushState(warningState)
         self.stateManager:popState()
     end
 end
@@ -59,7 +55,9 @@ function loadingState:draw()
     self.loadSprite:draw()
 
     -- Draw loading text
-    Graphics.debugPrint(screen_width - self.loadSprite.rect.x, self.loadSprite.rect.y, "Loading...", color_white)
+    Graphics.debugPrint(
+        screen_width - self.loadSprite.rect.x, self.loadSprite.rect.y,
+        "Loading... ", color_white)
 end
 
 -- On clean

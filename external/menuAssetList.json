@@ -63,5 +63,10 @@
         "type": "image",
         "name": "static_8",
         "path": "assets/gui/static/8.png"
+    },
+    {
+        "type": "image",
+        "name": "text_loading",
+        "path": "assets/text/WARNING.png"
     }
 ]

@@ -1,13 +1,5 @@
 -- Main menu handler
 local menuState = State:extend()
-menuState.assetManager = nil
-menuState.stateManager = nil
-menuState.backgroundTimer = nil
-menuState.backgroundFrame = nil
-menuState.backgroundSprite = nil
-menuState.staticTimer = nil
-menuState.staticFrame = nil
-menuState.staticSprite = nil
 
 -- Constructor
 function menuState:init(stateM, assetM)
@@ -15,7 +7,7 @@ function menuState:init(stateM, assetM)
     self.stateManager = stateM
     self.assetManager = assetM
 
-    -- Background sprite positions and frame
+    -- Background sprite position and frame
     self.backgroundSprite = Sprite:new()
     self.backgroundFrame = 1
     self.backgroundTimer = 0
@@ -25,10 +17,11 @@ function menuState:init(stateM, assetM)
     self.backgroundSprite.rect.w = screen_width
     self.backgroundSprite.rect.h = screen_height
 
-    -- Static sprite positions and frame
+    -- Static sprite position and frame
     self.staticSprite = Sprite:new()
     self.staticFrame = 1
     self.staticTimer = 0
+    self.staticSprite.tint = Color.new(255, 255, 255, 25)
     self.staticSprite:set(self.assetManager:getAsset("static_1"), true)
     self.staticSprite.rect.x = screen_width / 2
     self.staticSprite.rect.y = screen_height / 2
@@ -58,7 +51,7 @@ function menuState:update(dt)
     self.staticTimer = self.staticTimer + dt
     self.staticFrame = (self.staticFrame + 1) % 8 + 1
     while self.staticTimer > 0.09 do
-        aux = math.random(50, 150)
+        aux = math.random(25, 75)
         self.staticSprite.tint = Color.new(255, 255, 255, aux)
         self.staticSprite:set(self.assetManager:getAsset("static_" .. self.staticFrame), false)
         self.staticTimer = self.staticTimer - 0.09
