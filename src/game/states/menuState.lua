@@ -17,6 +17,14 @@ function menuState:init(stateM, assetM)
     self.backgroundSprite.rect.w = screen_width
     self.backgroundSprite.rect.h = screen_height
 
+    -- Game title sprite position
+    self.gameTitleSprite = Sprite:new()
+    self.gameTitleSprite:set(self.assetManager:getAsset("text_game_title"), true)
+    self.gameTitleSprite.rect.x = screen_width * 5 / 24
+    self.gameTitleSprite.rect.y = screen_height * 7 / 27
+    self.gameTitleSprite.rect.w = screen_width * 3 / 16
+    self.gameTitleSprite.rect.h = screen_height * 1 / 3
+    
     -- Static sprite position and frame
     self.staticSprite = Sprite:new()
     self.staticFrame = 1
@@ -27,6 +35,10 @@ function menuState:init(stateM, assetM)
     self.staticSprite.rect.y = screen_height / 2
     self.staticSprite.rect.w = screen_width
     self.staticSprite.rect.h = screen_height
+
+    -- "Darkness music"
+    Sound.play(self.assetManager:getAsset("sound_darkness_music").id, true)
+    Sound.play(self.assetManager:getAsset("sound_static2").id, false)
 end
 
 function menuState:update(dt)
@@ -62,6 +74,12 @@ function menuState:draw()
     -- Draw the background sprites
     self.backgroundSprite:draw()
     self.staticSprite:draw()
+    self.gameTitleSprite:draw()
+end
+
+function menuState:clear()
+    self.assetManager:unload("sound_darkness_music")
+    self.assetManager:unload("sound_static2")
 end
 
 return menuState

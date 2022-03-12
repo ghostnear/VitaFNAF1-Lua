@@ -20,6 +20,11 @@ function AssetManager:load(type, name, path)
             type = "animatedimage",
             id = Graphics.loadAnimatedImage("app0:/" .. path)
         }
+    elseif type == "sound" then
+        self.assets[name] = {
+            type = "sound",
+            id = Sound.open("app0:/" .. path)
+        }
     end
 end
 
@@ -32,7 +37,12 @@ end
 function AssetManager:unload(name)
     -- Pointer to the asset
     local asset = self.assets[name]
-    if type == "image" then
-        Graphics.freeImage(asset.file)
+    if type == "image" or type == "animatedimage" then
+        Graphics.freeImage(asset.id)
+    elseif type == "sound" then
+        if Sound.isPlaying(asset.id) then
+            Sound.pause(asset.id)
+        end
+        Sound.close(asset.id)
     end
 end

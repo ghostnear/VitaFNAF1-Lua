@@ -12,6 +12,9 @@ dofile('app0:/core/state.lua')
 local stateManager = dofile('app0:/core/statemanager.lua'):new()
 stateManager:pushState(dofile('app0:/game/states/loadingState.lua'):new(stateManager))
 
+-- Init stuff
+Sound.init()
+
 -- Main loop
 while not stateManager:canQuit() do
     -- Update
@@ -31,3 +34,6 @@ while not stateManager:canQuit() do
     Screen.flip()
     Screen.waitVblankStart()
 end
+
+-- Deinit stuff
+Sound.term()

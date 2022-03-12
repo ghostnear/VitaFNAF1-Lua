@@ -68,5 +68,20 @@
         "type": "image",
         "name": "text_loading",
         "path": "assets/text/WARNING.png"
+    },
+    {
+        "type": "image",
+        "name": "text_game_title",
+        "path": "assets/text/GAME_TITLE.png"
+    },
+    {
+        "type": "sound",
+        "name": "sound_darkness_music",
+        "path": "assets/audio/darkness_music.ogg"
+    },
+    {
+        "type": "sound",
+        "name": "sound_static2",
+        "path": "assets/audio/static2.ogg"
     }
 ]
