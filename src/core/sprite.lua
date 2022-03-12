@@ -4,14 +4,12 @@ Sprite.rect = nil
 Sprite.tint = nil
 Sprite.angle = nil
 Sprite.insideRect = nil
-Sprite.frame = nil
 Sprite.width = nil
 Sprite.height = nil
 Sprite.image = nil
 
 -- Main init function
 function Sprite:init()
-    self.frame = -1
     self.rect = {
         x = 0,
         y = 0,
@@ -50,13 +48,10 @@ end
 
 -- Draws the sprite
 function Sprite:draw()
-    -- If image is a collection of images (GIF)
-    if self.frame ~= -1 then
-        Graphics.setImageFrame(self.image, self.frame)
+    if self.image ~= nil then
+        Graphics.drawImageExtended(
+            self.rect.x, self.rect.y, self.image,
+            self.insideRect.x, self.insideRect.y, self.insideRect.w, self.insideRect.h,
+            self.angle, self.rect.w / self.width, self.rect.h / self.height, self.tint)
     end
-
-    Graphics.drawImageExtended(
-        self.rect.x, self.rect.y, self.image,
-        self.insideRect.x, self.insideRect.y, self.insideRect.w, self.insideRect.h,
-        self.angle, self.rect.w / self.width, self.rect.h / self.height, self.tint)
 end

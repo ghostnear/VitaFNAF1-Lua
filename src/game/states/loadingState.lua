@@ -1,5 +1,6 @@
 -- Loading screen, loads all assets and saves them in the AssetManager class
 local loadingState = State:extend()
+local json = dofile('app0:/lib/external/json.lua')
 loadingState.assetManager = nil
 loadingState.stateManager = nil
 loadingState.loadList = nil
@@ -11,18 +12,20 @@ function loadingState:init(stateM)
     self.assetManager = AssetManager:new()
     self.stateManager = stateM
 
-    -- TODO: get this from an XML or something similar
+    -- Open the load list from the assetlist file
+    -- The game is relatively small so we can keep everything in memory as the Vita RAM allows us to
     self.loadList = Queue:new()
-    self.loadList:push({
-        type = "image",
-        name = "gui_icon_load",
-        path = "assets/gui/loader.png"
-    })
-    self.loadList:push({
-        type = "animatedimage",
-        name = "menu_background",
-        path = "assets/menu/menu.gif"
-    })
+    local fileHandle = System.openFile("app0:/assetlist.json", FREAD)
+    local fileString = System.readFile(fileHandle, System.sizeFile(fileHandle))
+    local result = json.decode(fileString)
+    for i, v in pairs(result) do
+        self.loadList:push({
+            type = v.type,
+            name = v.name,
+            path = v.path
+        })
+    end
+    System.closeFile(fileHandle)
 
     -- Init sprite for drawing
     self.loadSprite = Sprite:new()

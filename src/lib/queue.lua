@@ -28,7 +28,7 @@ function Queue:pop()
     self.front = self.front + 1
 
     -- Rebuild if needed
-    self:rebuild()
+    --self:rebuild()
 end
 
 -- Gets first element of the queue
@@ -39,7 +39,7 @@ end
 -- Gets all the elements of the queue
 function Queue:getContainer()
     -- Always optimise container before sending it
-    self:rebuild()
+    --self:rebuild()
     return self.elements
 end
 

@@ -1,0 +1,27 @@
+[
+    {
+        "type": "image",
+        "name": "gui_icon_load",
+        "path": "assets/gui/loader.png"
+    },
+    {
+        "type": "image",
+        "name": "menu_background_1",
+        "path": "assets/menu/1.png"
+    },
+    {
+        "type": "image",
+        "name": "menu_background_2",
+        "path": "assets/menu/2.png"
+    },
+    {
+        "type": "image",
+        "name": "menu_background_3",
+        "path": "assets/menu/3.png"
+    },
+    {
+        "type": "image",
+        "name": "menu_background_4",
+        "path": "assets/menu/4.png"
+    }
+]
