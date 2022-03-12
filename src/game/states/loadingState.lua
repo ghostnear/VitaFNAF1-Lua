@@ -62,4 +62,9 @@ function loadingState:draw()
     Graphics.debugPrint(screen_width - self.loadSprite.rect.x, self.loadSprite.rect.y, "Loading...", color_white)
 end
 
+-- On clean
+function loadingState:clean()
+    self.assetManager:unload("gui_icon_load")
+end
+
 return loadingState

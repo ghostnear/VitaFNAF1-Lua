@@ -33,11 +33,20 @@ function StateManager:pushState(state)
 end
 
 function StateManager:popState()
+    -- Clean state
+    local front = self.stateQueue:getFront()
+    if front.clean then
+        front:clean()
+    end
+
+    -- Remove from queue
     self.stateQueue:pop()
 end
 
 function StateManager:clearStates()
-    self.stateQueue:clear()
+    while self.stateQueue:length() ~= 0 do
+        self:popState()
+    end
 end
 
 -- Checks if there are any states left
