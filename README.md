@@ -14,4 +14,9 @@ FNAF1 remake for the PSVita. Work barely started, updates will follow.
 - the timers from the Timer module are not accurate and will get out of sync. Since the game uses VSync, I decided to limit the delta timing to 60fps => more accurate timing. Might revisit that and if I don't find a fix, I will submit an issue to the vita-lpp repo.
 - Graphics.drawImageExtended() assumes the origin to be in the middle of the image
 
+## Resources used
+- [Screenshots of the decompiled code](https://imgur.com/a/xe01I#EB0sLer)
+- [Notes regarding the screenshots](https://imgur.com/a/xe01I#EB0sLer)
+- [Notes regarding audio](https://imgur.com/a/xe01I#EB0sLer)
+
 ### [Old C++ version](https://github.com/ghostnear/VitaFNAF1)
