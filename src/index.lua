@@ -14,20 +14,6 @@ stateManager:pushState(dofile('app0:/game/states/loadingState.lua'):new(stateMan
 
 -- Main loop
 while not stateManager:canQuit() do
-
-    -- Input testing
-    pad = Controls.read()
-    if Controls.check(pad, SCE_CTRL_CROSS) then
-        
-    end
-    if Controls.check(pad, SCE_CTRL_CIRCLE) then
-
-    end
-    if Controls.check(pad, SCE_CTRL_TRIANGLE) then
-        -- This efectively closes the app if no more states are added
-        stateManager:clearStates()
-    end
-
     -- Update
     stateManager:update(1 / 60)
 
