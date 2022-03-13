@@ -29,17 +29,33 @@ function menuState:init(stateM, assetM)
     self.button1Sprite = Sprite:new()
     self.button1Sprite:set(self.assetManager:getAsset("text_button_1"), true)
     self.button1Sprite.rect.x = screen_width * 5 / 24
-    self.button1Sprite.rect.y = screen_height * 2 / 3
+    self.button1Sprite.rect.y = screen_height * 8 / 15
     self.button1Sprite.rect.w = screen_width * 3 / 16
     self.button1Sprite.rect.h = screen_height * 1 / 19
 
     -- Continue sprite position
     self.button2Sprite = Sprite:new()
     self.button2Sprite:set(self.assetManager:getAsset("text_button_2"), true)
-    self.button2Sprite.rect.x = screen_width * 9 / 24
-    self.button2Sprite.rect.y = screen_height * 2 / 3
+    self.button2Sprite.rect.x = screen_width * 5 / 24
+    self.button2Sprite.rect.y = screen_height * 10 / 15
     self.button2Sprite.rect.w = screen_width * 3 / 16
     self.button2Sprite.rect.h = screen_height * 1 / 19
+
+    -- Sixth night sprite position
+    self.button3Sprite = Sprite:new()
+    self.button3Sprite:set(self.assetManager:getAsset("text_button_sixth_night"), true)
+    self.button3Sprite.rect.x = screen_width * 21 / 96
+    self.button3Sprite.rect.y = screen_height * 12 / 15
+    self.button3Sprite.rect.w = screen_width * 3 / 16 / 8 * 9
+    self.button3Sprite.rect.h = screen_height * 1.25 / 19
+
+    -- Custom Night sprite position
+    self.button4Sprite = Sprite:new()
+    self.button4Sprite:set(self.assetManager:getAsset("text_button_custom_night"), true)
+    self.button4Sprite.rect.x = screen_width * 51 / 200
+    self.button4Sprite.rect.y = screen_height * 14 / 15
+    self.button4Sprite.rect.w = screen_width * 3 / 16 / 8 * 12
+    self.button4Sprite.rect.h = screen_height * 1.25 / 19
     
     -- Static sprite position and frame
     self.staticSprite = Sprite:new()
@@ -95,6 +111,8 @@ function menuState:draw()
     self.gameTitleSprite:draw()
     self.button1Sprite:draw()
     self.button2Sprite:draw()
+    self.button3Sprite:draw()
+    self.button4Sprite:draw()
 end
 
 function menuState:clear()
