@@ -75,6 +75,16 @@
         "path": "assets/text/GAME_TITLE.png"
     },
     {
+        "type": "image",
+        "name": "text_button_1",
+        "path": "assets/text/BUTTON01.png"
+    },
+    {
+        "type": "image",
+        "name": "text_button_2",
+        "path": "assets/text/BUTTON02.png"
+    },
+    {
         "type": "sound",
         "name": "sound_darkness_music",
         "path": "assets/audio/darkness_music.ogg"

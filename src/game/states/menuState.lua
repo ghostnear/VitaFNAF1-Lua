@@ -24,6 +24,22 @@ function menuState:init(stateM, assetM)
     self.gameTitleSprite.rect.y = screen_height * 7 / 27
     self.gameTitleSprite.rect.w = screen_width * 3 / 16
     self.gameTitleSprite.rect.h = screen_height * 1 / 3
+
+    -- New game sprite position
+    self.button1Sprite = Sprite:new()
+    self.button1Sprite:set(self.assetManager:getAsset("text_button_1"), true)
+    self.button1Sprite.rect.x = screen_width * 5 / 24
+    self.button1Sprite.rect.y = screen_height * 2 / 3
+    self.button1Sprite.rect.w = screen_width * 3 / 16
+    self.button1Sprite.rect.h = screen_height * 1 / 19
+
+    -- Continue sprite position
+    self.button2Sprite = Sprite:new()
+    self.button2Sprite:set(self.assetManager:getAsset("text_button_2"), true)
+    self.button2Sprite.rect.x = screen_width * 9 / 24
+    self.button2Sprite.rect.y = screen_height * 2 / 3
+    self.button2Sprite.rect.w = screen_width * 3 / 16
+    self.button2Sprite.rect.h = screen_height * 1 / 19
     
     -- Static sprite position and frame
     self.staticSprite = Sprite:new()
@@ -74,7 +90,11 @@ function menuState:draw()
     -- Draw the background sprites
     self.backgroundSprite:draw()
     self.staticSprite:draw()
+
+    -- Draw text
     self.gameTitleSprite:draw()
+    self.button1Sprite:draw()
+    self.button2Sprite:draw()
 end
 
 function menuState:clear()
