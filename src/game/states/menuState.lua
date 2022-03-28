@@ -25,37 +25,49 @@ function menuState:init(stateM, assetM)
     self.gameTitleSprite.rect.w = screen_width * 3 / 16
     self.gameTitleSprite.rect.h = screen_height * 1 / 3
 
+    -- Button sprites inits
+    self.buttonSprites = {}
+
     -- New game sprite position
-    self.button1Sprite = Sprite:new()
-    self.button1Sprite:set(self.assetManager:getAsset("text_button_1"), true)
-    self.button1Sprite.rect.x = screen_width * 5 / 24
-    self.button1Sprite.rect.y = screen_height * 8 / 15
-    self.button1Sprite.rect.w = screen_width * 3 / 16
-    self.button1Sprite.rect.h = screen_height * 1 / 19
+    self.buttonSprites[1] = Sprite:new()
+    self.buttonSprites[1]:set(self.assetManager:getAsset("text_button_1"), true)
+    self.buttonSprites[1].rect.x = screen_width * 5 / 24
+    self.buttonSprites[1].rect.y = screen_height * 8 / 15
+    self.buttonSprites[1].rect.w = screen_width * 3 / 16
+    self.buttonSprites[1].rect.h = screen_height * 1 / 19
+
+    -- Arrows sprite position
+    self.arrows = Sprite:new()
+    self.arrows:set(self.assetManager:getAsset("gui_menu_arrows"), true)
+    self.arrows.rect.w = screen_height * 1 / 19
+    self.arrows.rect.h = screen_height * 1 / 19
+    self.arrows.rect.x = screen_width * 5 / 24 - self.arrows.rect.w * 4.5
+    self.arrows.rect.y = screen_height * 8 / 15
+    self.arrowindex = 1
 
     -- Continue sprite position
-    self.button2Sprite = Sprite:new()
-    self.button2Sprite:set(self.assetManager:getAsset("text_button_2"), true)
-    self.button2Sprite.rect.x = screen_width * 5 / 24
-    self.button2Sprite.rect.y = screen_height * 10 / 15
-    self.button2Sprite.rect.w = screen_width * 3 / 16
-    self.button2Sprite.rect.h = screen_height * 1 / 19
+    self.buttonSprites[2] = Sprite:new()
+    self.buttonSprites[2]:set(self.assetManager:getAsset("text_button_2"), true)
+    self.buttonSprites[2].rect.x = screen_width * 5 / 24
+    self.buttonSprites[2].rect.y = screen_height * 10 / 15
+    self.buttonSprites[2].rect.w = screen_width * 3 / 16
+    self.buttonSprites[2].rect.h = screen_height * 1 / 19
 
     -- Sixth night sprite position
-    self.button3Sprite = Sprite:new()
-    self.button3Sprite:set(self.assetManager:getAsset("text_button_sixth_night"), true)
-    self.button3Sprite.rect.x = screen_width * 21 / 96
-    self.button3Sprite.rect.y = screen_height * 12 / 15
-    self.button3Sprite.rect.w = screen_width * 3 / 16 / 8 * 9
-    self.button3Sprite.rect.h = screen_height * 1.25 / 19
+    self.buttonSprites[3] = Sprite:new()
+    self.buttonSprites[3]:set(self.assetManager:getAsset("text_button_sixth_night"), true)
+    self.buttonSprites[3].rect.x = screen_width * 21 / 96
+    self.buttonSprites[3].rect.y = screen_height * 12 / 15
+    self.buttonSprites[3].rect.w = screen_width * 3 / 16 / 8 * 9
+    self.buttonSprites[3].rect.h = screen_height * 1.25 / 19
 
     -- Custom Night sprite position
-    self.button4Sprite = Sprite:new()
-    self.button4Sprite:set(self.assetManager:getAsset("text_button_custom_night"), true)
-    self.button4Sprite.rect.x = screen_width * 51 / 200
-    self.button4Sprite.rect.y = screen_height * 14 / 15
-    self.button4Sprite.rect.w = screen_width * 3 / 16 / 8 * 12
-    self.button4Sprite.rect.h = screen_height * 1.25 / 19
+    self.buttonSprites[4] = Sprite:new()
+    self.buttonSprites[4]:set(self.assetManager:getAsset("text_button_custom_night"), true)
+    self.buttonSprites[4].rect.x = screen_width * 51 / 200
+    self.buttonSprites[4].rect.y = screen_height * 14 / 15
+    self.buttonSprites[4].rect.w = screen_width * 3 / 16 / 8 * 12
+    self.buttonSprites[4].rect.h = screen_height * 1.25 / 19
     
     -- Static sprite position and frame
     self.staticSprite = Sprite:new()
@@ -91,6 +103,19 @@ function menuState:update(dt)
         self.backgroundTimer = self.backgroundTimer - 0.08
     end
 
+    -- Update the arrow sprite
+    self.arrows.rect.y = self.buttonSprites[self.arrowindex].rect.y
+    if Input:checkPressed(SCE_CTRL_UP) then
+        if self.arrowindex > 1 then
+            self.arrowindex = self.arrowindex - 1;
+        end
+    end
+    if Input:checkPressed(SCE_CTRL_DOWN) then
+        if self.arrowindex < 4 then
+            self.arrowindex = self.arrowindex + 1;
+        end
+    end
+
     -- Update the static sprite
     self.staticTimer = self.staticTimer + dt
     self.staticFrame = (self.staticFrame + 1) % 8 + 1
@@ -109,10 +134,10 @@ function menuState:draw()
 
     -- Draw text
     self.gameTitleSprite:draw()
-    self.button1Sprite:draw()
-    self.button2Sprite:draw()
-    self.button3Sprite:draw()
-    self.button4Sprite:draw()
+    for i, k in pairs(self.buttonSprites) do
+        k:draw()
+    end
+    self.arrows:draw()
 end
 
 function menuState:clear()

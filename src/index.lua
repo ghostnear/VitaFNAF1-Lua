@@ -4,6 +4,7 @@ dofile('app0:/lib/queue.lua')
 
 -- Global core includes
 dofile('app0:/core/globals.lua')
+dofile('app0:/core/input.lua')
 dofile('app0:/core/assetmanager.lua')
 dofile('app0:/core/sprite.lua')
 dofile('app0:/core/state.lua')
@@ -18,6 +19,7 @@ Sound.init()
 -- Main loop
 while not stateManager:canQuit() do
     -- Update
+    Input:update()
     stateManager:update(1 / 60)
 
     -- Start the rendering

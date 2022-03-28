@@ -38,10 +38,9 @@ function warningState:update(dt)
     end
 
     -- Skip intro using inputs
-    local pad = Controls.read()
-    if Controls.check(pad, SCE_CTRL_CROSS) or
-       Controls.check(pad, SCE_CTRL_RTRIGGER) or 
-       Controls.check(pad, SCE_CTRL_START) then
+    if Input:check(SCE_CTRL_CROSS) or
+       Input:check(SCE_CTRL_RTRIGGER) or 
+       Input:check(SCE_CTRL_START) then
         self:moveToMenu()
     end
 end

@@ -95,6 +95,16 @@
         "path": "assets/text/CUSTOM_NIGHT.png"
     },
     {
+        "type": "image",
+        "name": "gui_menu_arrows",
+        "path": "assets/text/SET_.png"
+    },
+    {
+        "type": "image",
+        "name": "text_menu_copyright",
+        "path": "assets/text/CREDIT.png"
+    },
+    {
         "type": "sound",
         "name": "sound_darkness_music",
         "path": "assets/audio/darkness_music.ogg"
