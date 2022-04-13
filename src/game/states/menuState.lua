@@ -7,6 +7,14 @@ function menuState:init(stateM, assetM)
     self.stateManager = stateM
     self.assetManager = assetM
 
+    -- Input timer
+    self.inputTimer = 0
+
+    -- Save values
+    self.currentNight = 1
+    self.beatgame = 1
+    self.beat6 = 1
+
     -- Background sprite position and frame
     self.backgroundSprite = Sprite:new()
     self.backgroundFrame = 1
@@ -27,6 +35,7 @@ function menuState:init(stateM, assetM)
 
     -- Button sprites inits
     self.buttonSprites = {}
+    self.buttonEnabled = {}
 
     -- New game sprite position
     self.buttonSprites[1] = Sprite:new()
@@ -35,6 +44,7 @@ function menuState:init(stateM, assetM)
     self.buttonSprites[1].rect.y = screen_height * 8 / 15
     self.buttonSprites[1].rect.w = screen_width * 3 / 16
     self.buttonSprites[1].rect.h = screen_height * 1 / 19
+    self.buttonEnabled[1] = true
 
     -- Arrows sprite position
     self.arrows = Sprite:new()
@@ -52,6 +62,7 @@ function menuState:init(stateM, assetM)
     self.buttonSprites[2].rect.y = screen_height * 10 / 15
     self.buttonSprites[2].rect.w = screen_width * 3 / 16
     self.buttonSprites[2].rect.h = screen_height * 1 / 19
+    self.buttonEnabled[2] = true
 
     -- Sixth night sprite position
     self.buttonSprites[3] = Sprite:new()
@@ -60,6 +71,7 @@ function menuState:init(stateM, assetM)
     self.buttonSprites[3].rect.y = screen_height * 12 / 15
     self.buttonSprites[3].rect.w = screen_width * 3 / 16 / 8 * 9
     self.buttonSprites[3].rect.h = screen_height * 1.25 / 19
+    self.buttonEnabled[4] = false
 
     -- Custom Night sprite position
     self.buttonSprites[4] = Sprite:new()
@@ -68,6 +80,7 @@ function menuState:init(stateM, assetM)
     self.buttonSprites[4].rect.y = screen_height * 14 / 15
     self.buttonSprites[4].rect.w = screen_width * 3 / 16 / 8 * 12
     self.buttonSprites[4].rect.h = screen_height * 1.25 / 19
+    self.buttonEnabled[4] = false
     
     -- Static sprite position and frame
     self.staticSprite = Sprite:new()
@@ -80,6 +93,22 @@ function menuState:init(stateM, assetM)
     self.staticSprite.rect.w = screen_width
     self.staticSprite.rect.h = screen_height
 
+    -- Scanline sprite position
+    self.scanlineRect = {
+        x = 0,
+        y = -screen_height / 20,
+        w = screen_width,
+        h = screen_height / 20
+    }
+
+    -- Check saved values
+    if self.beatgame ~= 0 then
+        self.buttonEnabled[3] = true
+    end
+    if self.beat6 ~= 0 then
+        self.buttonEnabled[4] = true
+    end
+
     -- "Darkness music"
     Sound.play(self.assetManager:getAsset("sound_darkness_music").id, true)
     Sound.play(self.assetManager:getAsset("sound_static2").id, false)
@@ -88,6 +117,14 @@ end
 function menuState:update(dt)
     -- Auxiliary variable
     local aux = nil
+    self.scanlineRect.y = self.scanlineRect.y + screen_height / 20 * dt
+    while self.scanlineRect.y >= screen_height do
+        self.scanlineRect.y = self.scanlineRect.y - screen_height - screen_height / 20
+    end
+    self.inputTimer = self.inputTimer + dt * 5
+    if self.inputTimer > 1 then
+        self.inputTimer = 1
+    end
 
     -- Update the background sprite
     self.backgroundTimer = self.backgroundTimer + dt
@@ -105,16 +142,18 @@ function menuState:update(dt)
 
     -- Update the arrow sprite
     self.arrows.rect.y = self.buttonSprites[self.arrowindex].rect.y
-    if Input:checkPressed(SCE_CTRL_UP) then
-        if self.arrowindex > 1 then
+    if self.inputTimer == 1 and Input:check(SCE_CTRL_UP) then
+        if self.arrowindex > 1 and self.buttonEnabled[self.arrowindex - 1] then
             self.arrowindex = self.arrowindex - 1;
             Sound.play(self.assetManager:getAsset("sound_blip3").id, false)
+            self.inputTimer = 0
         end
     end
-    if Input:checkPressed(SCE_CTRL_DOWN) then
-        if self.arrowindex < 4 then
+    if self.inputTimer == 1 and Input:check(SCE_CTRL_DOWN) then
+        if self.arrowindex < 4 and self.buttonEnabled[self.arrowindex + 1] then
             self.arrowindex = self.arrowindex + 1;
             Sound.play(self.assetManager:getAsset("sound_blip3").id, false)
+            self.inputTimer = 0
         end
     end
 
@@ -132,12 +171,18 @@ end
 function menuState:draw()
     -- Draw the background sprites
     self.backgroundSprite:draw()
+    Graphics.fillRect(
+        self.scanlineRect.x, self.scanlineRect.x + self.scanlineRect.w,
+        self.scanlineRect.y, self.scanlineRect.y + self.scanlineRect.h,
+        Color.new(255, 255, 255, 45))
     self.staticSprite:draw()
 
     -- Draw text
     self.gameTitleSprite:draw()
     for i, k in pairs(self.buttonSprites) do
-        k:draw()
+        if self.buttonEnabled[i] then
+            k:draw()
+        end
     end
     self.arrows:draw()
 end
