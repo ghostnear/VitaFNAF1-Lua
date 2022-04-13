@@ -113,5 +113,10 @@
         "type": "sound",
         "name": "sound_static2",
         "path": "assets/audio/static2.ogg"
+    },
+    {
+        "type": "sound",
+        "name": "sound_blip3",
+        "path": "assets/audio/blip3.ogg"
     }
 ]

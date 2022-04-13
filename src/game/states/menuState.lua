@@ -108,11 +108,13 @@ function menuState:update(dt)
     if Input:checkPressed(SCE_CTRL_UP) then
         if self.arrowindex > 1 then
             self.arrowindex = self.arrowindex - 1;
+            Sound.play(self.assetManager:getAsset("sound_blip3").id, false)
         end
     end
     if Input:checkPressed(SCE_CTRL_DOWN) then
         if self.arrowindex < 4 then
             self.arrowindex = self.arrowindex + 1;
+            Sound.play(self.assetManager:getAsset("sound_blip3").id, false)
         end
     end
 
@@ -143,6 +145,7 @@ end
 function menuState:clear()
     self.assetManager:unload("sound_darkness_music")
     self.assetManager:unload("sound_static2")
+    self.assetManager:unload("sound_blip3")
 end
 
 return menuState
