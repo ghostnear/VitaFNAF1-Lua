@@ -96,6 +96,61 @@
     },
     {
         "type": "image",
+        "name": "text_menu_night",
+        "path": "assets/text/NIGHT.png"
+    },
+    {
+        "type": "image",
+        "name": "text_font1_0",
+        "path": "assets/text/font1/0.png"
+    },
+    {
+        "type": "image",
+        "name": "text_font1_1",
+        "path": "assets/text/font1/1.png"
+    },
+    {
+        "type": "image",
+        "name": "text_font1_2",
+        "path": "assets/text/font1/2.png"
+    },
+    {
+        "type": "image",
+        "name": "text_font1_3",
+        "path": "assets/text/font1/3.png"
+    },
+    {
+        "type": "image",
+        "name": "text_font1_4",
+        "path": "assets/text/font1/4.png"
+    },
+    {
+        "type": "image",
+        "name": "text_font1_5",
+        "path": "assets/text/font1/5.png"
+    },
+    {
+        "type": "image",
+        "name": "text_font1_6",
+        "path": "assets/text/font1/6.png"
+    },
+    {
+        "type": "image",
+        "name": "text_font1_7",
+        "path": "assets/text/font1/7.png"
+    },
+    {
+        "type": "image",
+        "name": "text_font1_8",
+        "path": "assets/text/font1/8.png"
+    },
+    {
+        "type": "image",
+        "name": "text_font1_9",
+        "path": "assets/text/font1/9.png"
+    },
+    {
+        "type": "image",
         "name": "gui_menu_arrows",
         "path": "assets/text/SET_.png"
     },

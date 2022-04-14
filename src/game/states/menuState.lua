@@ -64,6 +64,21 @@ function menuState:init(stateM, assetM)
     self.buttonSprites[2].rect.h = screen_height * 1 / 19
     self.buttonEnabled[2] = true
 
+    -- Night text sprite
+    self.nightTextSprite = Sprite:new()
+    self.nightTextSprite:set(self.assetManager:getAsset("text_menu_night"), true)
+    self.nightTextSprite.rect.w = self.buttonSprites[2].rect.w * 2 / 5
+    self.nightTextSprite.rect.x = self.buttonSprites[2].rect.x - self.buttonSprites[2].rect.w / 2 + self.nightTextSprite.rect.w / 2
+    self.nightTextSprite.rect.y = self.buttonSprites[2].rect.y + self.buttonSprites[2].rect.h
+    self.nightTextSprite.rect.h = self.buttonSprites[2].rect.h * 9 / 10
+
+    self.nightNumberSprite = Sprite:new()
+    self.nightNumberSprite:set(self.assetManager:getAsset("text_font1_" .. self.currentNight), true)
+    self.nightNumberSprite.rect.w = self.nightTextSprite.rect.w / 7.25
+    self.nightNumberSprite.rect.h = self.nightTextSprite.rect.h * 0.7
+    self.nightNumberSprite.rect.x = self.nightTextSprite.rect.x + self.nightTextSprite.rect.w - self.nightNumberSprite.rect.w
+    self.nightNumberSprite.rect.y = self.nightTextSprite.rect.y
+
     -- Sixth night sprite position
     self.buttonSprites[3] = Sprite:new()
     self.buttonSprites[3]:set(self.assetManager:getAsset("text_button_sixth_night"), true)
@@ -143,14 +158,14 @@ function menuState:update(dt)
     -- Update the arrow sprite
     self.arrows.rect.y = self.buttonSprites[self.arrowindex].rect.y
     if self.inputTimer == 1 and Input:check(SCE_CTRL_UP) then
-        if self.arrowindex > 1 and self.buttonEnabled[self.arrowindex - 1] then
+        if self.arrowindex > 1 and self.buttonEnabled[self.arrowindex - 1] == true then
             self.arrowindex = self.arrowindex - 1;
             Sound.play(self.assetManager:getAsset("sound_blip3").id, false)
             self.inputTimer = 0
         end
     end
     if self.inputTimer == 1 and Input:check(SCE_CTRL_DOWN) then
-        if self.arrowindex < 4 and self.buttonEnabled[self.arrowindex + 1] then
+        if self.arrowindex < 4 and self.buttonEnabled[self.arrowindex + 1] == true then
             self.arrowindex = self.arrowindex + 1;
             Sound.play(self.assetManager:getAsset("sound_blip3").id, false)
             self.inputTimer = 0
@@ -180,9 +195,13 @@ function menuState:draw()
     -- Draw text
     self.gameTitleSprite:draw()
     for i, k in pairs(self.buttonSprites) do
-        if self.buttonEnabled[i] then
+        if self.buttonEnabled[i] == true then
             k:draw()
         end
+    end
+    if self.buttonEnabled[2] == true then
+        self.nightTextSprite:draw()
+        self.nightNumberSprite:draw()
     end
     self.arrows:draw()
 end
